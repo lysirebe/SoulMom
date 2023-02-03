@@ -1,0 +1,45 @@
+body{
+  margin:0;
+  background-color: #fffaf0;
+}
+
+.mainSection{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0;
+}
+
+.homeTitle{
+    /* font-family: 'Lora', serif;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif; */
+    font-family: 'Syne', sans-serif;
+    color: #ff601c;
+    font-size: 50px;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color:#783d1f;text-decoration-thickness: 3px;
+    
+    
+}
+
+.homeSlogan{
+  font-family: 'Lora', serif;
+  color:#783d1f;
+  font-size: large;
+  font-size: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+
+.signupLink{
+  font-family: 'Open Sans', sans-serif;
+  color: #ff601c;
+  font-size: 20px;
+}
