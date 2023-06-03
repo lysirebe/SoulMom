@@ -3,9 +3,8 @@ require('dotenv').config();
 const router = require('express').Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const pool = require("../config/db");
-// const auth = require("../middleware/authorise")
+const authorise = require('../middleware/authorise');
 
 //register
 router.post("/register", async (req, res) => {
@@ -28,20 +27,21 @@ router.post("/register", async (req, res) => {
       "INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *", [name, email, hashedPw]
     );
     // create jwt token
-
-    const userData = {
-      user_id: newUser.rows[0].user_id,
-      email,
-      name
+    const payload = {
+      user: {
+        user_id: newUser.rows[0].user_id,
+        email: newUser.rows[0].email,
+        name: newUser.rows[0].name
+      }
     }
 
-    const jwtToken = jwt.sign(userData, process.env.JWTSECRET, { expiresIn: "1h" })
+    const jwtToken = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: "1h" })
+    
     res.status(201).json({
       message: "User created",
       user: newUser.rows[0],
       token: jwtToken
     })
-    // res.json(newUser.rows[0])
     
     
   } catch (err) {
@@ -66,12 +66,15 @@ router.post("/login", async (req, res) => {
 
     if (isPasswordValid) {
       // create token
-      const userData = {
-        user_id: user.rows[0].user_id,
-        email: user.rows[0].email,
-        name: user.rows[0].name
+      const payload = {
+        user: {
+          user_id: user.rows[0].user_id,
+          email: user.rows[0].email,
+          name: user.rows[0].name 
+        }
       }
-      const jwtToken = jwt.sign(userData, process.env.JWTSECRET, { expiresIn: "1h" })
+
+      const jwtToken = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: "1h" })
       
       return res.status(400).json({
         message: "succesfully logged in",
@@ -86,4 +89,17 @@ router.post("/login", async (req, res) => {
     res.status(500).send(err.message)
   }
 })
+
+//verify user
+router.get("/verify", authorise, async (req, res) => {
+  try {
+    res.json(true);
+    
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message)
+  }
+})
+
+
 module.exports = router;
