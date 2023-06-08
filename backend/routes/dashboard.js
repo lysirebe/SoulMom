@@ -18,7 +18,8 @@ router.post("/", authorise, async (req, res) => {
 )
 
 router.get("/entries", authorise, journal.getEntries);
-router.post("/newEntry", authorise, journal.createEntry);
+router.post("/newEntry",journal.newEntry);
+// router.post("/newEntry", authorise, journal.createEntry);
 router.put("/updateEntry/:journalid", journal.updateEntry);
 router.delete("/deleteEntry/:journalid", journal.deleteEntry);
 

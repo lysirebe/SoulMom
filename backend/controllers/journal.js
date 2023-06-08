@@ -13,15 +13,38 @@ const getEntries = (req, res) => {
   })
 }
 
-const createEntry = (req, res) => {
+// const createEntry = (req, res) => {
 
+//   const { title, entry } = req.body;
+
+//   const userid = req.user.user_id;
+
+//   pool.query(
+//     "INSERT INTO journal (user_id, title, entry) VALUES ($1, $2, $3) RETURNING *",
+//     [userid, title, entry],
+//     (err, result) => {
+//       if (err) {
+//         console.error(err.message);
+//         res.status(500).json({ message: "Cant add entry to db" });
+//       } else {
+//         res.status(200).json({
+//           message: "entry added to db",
+//           entry: result.rows[0],
+//         });
+//       }
+//     }
+//   );
+// }
+
+
+// new route for simplicity sake, not associated with user. actual route is above
+const newEntry = (req, res) => {
   const { title, entry } = req.body;
 
-  const userid = req.user.user_id;
 
   pool.query(
-    "INSERT INTO journal (user_id, title, entry) VALUES ($1, $2, $3) RETURNING *",
-    [userid, title, entry],
+    "INSERT INTO journal (title, entry) VALUES ($1, $2) RETURNING *",
+    [title, entry],
     (err, result) => {
       if (err) {
         console.error(err.message);
@@ -34,7 +57,7 @@ const createEntry = (req, res) => {
       }
     }
   );
-}
+};
 
 const updateEntry = (req, res) => {
   // const userid = req.user.user_id;
@@ -76,7 +99,8 @@ const deleteEntry = (req, res) => {
 // have a recently deleted file 
 module.exports = {
   getEntries,
-  createEntry,
+  newEntry,
+  // createEntry,
   updateEntry,
   deleteEntry
 }
