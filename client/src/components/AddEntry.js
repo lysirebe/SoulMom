@@ -31,7 +31,7 @@ const AddEntry = () => {
         <h1>SoulMom</h1>
         <h2>Add New Soul Entry</h2>
         <form onSubmit={onSubmitForm}>
-          <label for="title">Give your entry a title</label>
+          <label htmlFor="title">Give your entry a title</label>
           <input
             type="text"
             name="title"
@@ -41,7 +41,7 @@ const AddEntry = () => {
 
           <br />
 
-          <label for="entry">Write to your hearts content </label>
+          <label htmlFor="entry">Write to your hearts content </label>
           <input
             type="text"
             name="entry"

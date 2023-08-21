@@ -1,0 +1,33 @@
+services:
+  frontend:
+    image: react-app
+    build: ./client
+    container_name: soulmom_frontend
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+
+  backend:
+    build: ./backend
+    container_name: soulmom_backend
+    ports:
+     - '5000:5000'
+    stdin_open: true
+    tty: true
+    # networks:
+    #  - soul-mom
+    depends_on:
+     - db
+
+  db:
+    container_name: soulmom_db
+    image: postgres:alpine
+    ports:
+     - "5432:5432"
+    environment: 
+      POSTGRES_USER: postgres 
+      POSTGRES_PASSWORD: 1234 
+      POSTGRES_DB: soulmom
