@@ -5,9 +5,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 const authorise = require('../middleware/authorise');
+const validation = require('../middleware/validation')
 
 //register
-router.post("/register", async (req, res) => {
+router.post("/register", validation, async (req, res) => {
   try {
     //destrctrcture the req.body
     const { name, email, password } = req.body;
@@ -51,7 +52,7 @@ router.post("/register", async (req, res) => {
 })
 
 //login
-router.post("/login", async (req, res) => {
+router.post("/login", validation, async (req, res) => {
   try {
     const { email, password } = req.body;
 
