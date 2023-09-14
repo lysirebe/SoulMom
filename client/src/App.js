@@ -1,27 +1,38 @@
 import './App.css';
-import { 
-  Routes,
-  Route } from 'react-router-dom';
-  import { Fragment } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { AuthProvider } from './AuthContext';
 
 //pages
   import SignupPage from './pages/SignupPage';
   import LoginPage from './pages/LoginPage';
   import LandingPage from './pages/LandingPage';
+  import DashboardPage from './pages/DashboardPage';
 
 
   //components 
   import Navbar from './components/Navbar';
 
+  // import { createContext } from 'react';
+  // export const AuthContext = createContext()
+
   function App(){
+
     return (
       <>
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
+      <BrowserRouter>
+        <AuthProvider>
+
+         <Navbar/>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/dashboard" element={<DashboardPage />}/>
+          </Routes>
+
+        </AuthProvider>
+        </BrowserRouter>
         </>
       
 

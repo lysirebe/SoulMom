@@ -8,7 +8,7 @@ const authorise = require('../middleware/authorise');
 const validation = require('../middleware/validation')
 
 //register
-router.post("/register", validation, async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     //destrctrcture the req.body
     const { name, email, password } = req.body;
@@ -52,7 +52,7 @@ router.post("/register", validation, async (req, res) => {
 })
 
 //login
-router.post("/login", validation, async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -77,13 +77,16 @@ router.post("/login", validation, async (req, res) => {
 
       const jwtToken = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: "1h" })
       
-      return res.status(400).json({
+      return res.status(200).json({
         message: "succesfully logged in",
         user: user.rows[0],
         token:jwtToken
       })
     } else {
-      return res.status(400).json({ message: "Incorrect Password" })
+      return res.status(401).json({ 
+        message: "Incorrect Password" ,
+        token:null
+      })
     }
   }
   catch (err) {

@@ -21,4 +21,4 @@ const loginFields=[
     }
 ]
 
-export {loginFields}
+export {loginFields};
