@@ -17,6 +17,6 @@ ALTER COLUMN title DROP NOT NULL;
 
 -- {
 --     "title": "you cant be creative without taking risks ",
---     "entry": "watching content and media thant invokes inspiration and curiosity, and exposes you to new realms of thinking is what i love"
+--     "entry": "i am watching content and media thant invokes inspiration and curiosity, and exposes you to new realms of thinking is what i love"
 -- }
 
